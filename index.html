@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PROTÓTIPO: impede o Google de indexar a pré-visualização. Remover no lançamento. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Pousada Bosque das Araucárias · Campos do Jordão</title>
+<meta name="description" content="Pousada em Campos do Jordão (SP) com vista para as montanhas, café da manhã em buffet, Wi-Fi e estacionamento grátis. Nota 9,2 no Booking.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  PROTÓTIPO v1 (31/10/2026)
+  Fontes dos dados:
+    - Nota, avaliações, quartos, regras e distâncias: página da pousada no Booking.com,
+      consultada em 31/10/2026: https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html
+    - WhatsApp e Instagram: links enviados pelo Henrique (31/10/2026).
+    - E-mail e endereço: site antigo (pousadabosquedasaraucarias.com.br). E-mail A CONFIRMAR.
+  Para atualizar a nota/avaliações: editar a seção "AVALIACOES" mais abaixo.
+-->
+<style>
+  :root {
+    --verde: #1f3a2e;
+    --verde-claro: #2f5643;
+    --creme: #f7f2ea;
+    --papel: #fffdf9;
+    --terracota: #b5532f;
+    --texto: #2a2a26;
+    --texto-suave: #5d5b54;
+    --linha: #e4ddd0;
+    --booking: #003b95;
+    --whatsapp: #1fa855;
+    --raio: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--texto);
+    background: var(--creme);
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--verde); }
+  .container { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  section { padding: 88px 0; }
+  .sobretitulo {
+    font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--terracota); font-weight: 600; margin-bottom: 10px;
+  }
+  .intro { color: var(--texto-suave); max-width: 640px; margin: 14px 0 40px; }
+
+  /* Botões */
+  .botao {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px;
+    font-weight: 600; text-decoration: none; font-size: .95rem;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .botao:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+  .botao-booking { background: var(--booking); color: #fff; }
+  .botao-whatsapp { background: var(--whatsapp); color: #fff; }
+  .botao-claro { background: #fff; color: var(--verde); }
+  .botao svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* Cabeçalho */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    background: rgba(31, 58, 46, .92); backdrop-filter: blur(8px);
+    color: #fff;
+  }
+  header .container { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .marca { font-family: "Fraunces", serif; font-size: 1.15rem; text-decoration: none; white-space: nowrap; }
+  .marca span { color: #d9c7a3; }
+  nav { display: flex; gap: 26px; font-size: .92rem; }
+  nav a { text-decoration: none; opacity: .85; }
+  nav a:hover { opacity: 1; }
+  header .botao { padding: 9px 18px; }
+
+  /* Capa */
+  .capa {
+    min-height: 100svh; display: flex; align-items: flex-end;
+    padding: 0 0 72px;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.15) 30%, rgba(15,30,22,.8) 100%),
+      url("fotos/vista-sacada.jpg") center / cover;
+    color: #fff;
+  }
+  .capa h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); max-width: 14ch; }
+  .capa p { font-size: 1.15rem; max-width: 560px; margin: 16px 0 28px; opacity: .95; }
+  .capa .botoes { display: flex; flex-wrap: wrap; gap: 12px; }
+  .selo-nota {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3);
+    padding: 6px 14px 6px 6px; border-radius: 999px; font-size: .9rem; margin-bottom: 20px;
+    text-decoration: none;
+  }
+  .selo-nota b {
+    background: var(--booking); color: #fff; border-radius: 8px 8px 8px 0;
+    padding: 4px 8px; font-size: .95rem;
+  }
+
+  /* Destaques */
+  .destaques { background: var(--verde); color: #fff; padding: 28px 0; }
+  .destaques ul {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px;
+  }
+  .destaques li { display: flex; align-items: center; gap: 12px; font-size: .95rem; }
+  .destaques svg { width: 26px; height: 26px; flex: none; fill: none; stroke: #d9c7a3; stroke-width: 1.6; }
+
+  /* Quartos */
+  .quartos-fotos { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .quartos-fotos img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--raio); aspect-ratio: 4/3; }
+  .quartos-fotos img:first-child { grid-row: span 2; aspect-ratio: auto; }
+  .tipos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .tipo {
+    background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio);
+    padding: 20px 22px;
+  }
+  .tipo h3 { font-size: 1.2rem; color: var(--verde); margin-bottom: 6px; }
+  .tipo p { margin: 0; color: var(--texto-suave); font-size: .93rem; }
+  .tipo .etiqueta {
+    display: inline-block; margin-top: 10px; font-size: .78rem; font-weight: 600;
+    color: var(--terracota); background: #f6e6dd; padding: 2px 10px; border-radius: 999px;
+  }
+  .nota-rodape { font-size: .85rem; color: var(--texto-suave); margin-top: 18px; }
+
+  /* Café */
+  .cafe { background: var(--papel); }
+  .cafe-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .cafe-fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cafe-fotos img { border-radius: var(--raio); aspect-ratio: 1; object-fit: cover; width: 100%; }
+  .cafe-fotos img:first-child { grid-column: span 2; aspect-ratio: 16/10; }
+
+  /* Galeria */
+  .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .galeria button {
+    padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; overflow: hidden;
+  }
+  .galeria img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform .3s; }
+  .galeria button:hover img { transform: scale(1.04); }
+  dialog {
+    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh;
+  }
+  dialog::backdrop { background: rgba(10, 18, 14, .9); }
+  dialog img { max-height: 86vh; border-radius: 8px; margin: auto; }
+  dialog p { color: #fff; text-align: center; margin: 10px 0 0; font-size: .95rem; }
+  .fechar {
+    position: fixed; top: 16px; right: 20px; font-size: 2rem; color: #fff;
+    background: none; border: 0; cursor: pointer; line-height: 1;
+  }
+
+  /* Avaliações */
+  .avaliacoes { background: var(--verde); color: #fff; }
+  .avaliacoes h2 { color: #fff; }
+  .avaliacoes .intro { color: #cfdcd4; }
+  .aval-grade { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+  .nota-grande {
+    background: #fff; color: var(--texto); border-radius: var(--raio); padding: 28px; text-align: center;
+  }
+  .nota-grande .numero {
+    display: inline-block; background: var(--booking); color: #fff;
+    font-size: 2.6rem; font-weight: 600; padding: 6px 18px; border-radius: 14px 14px 14px 0;
+  }
+  .nota-grande .rotulo { font-family: "Fraunces", serif; font-size: 1.5rem; margin: 12px 0 2px; color: var(--verde); }
+  .nota-grande small { color: var(--texto-suave); }
+  .nota-grande .botao { margin-top: 18px; width: 100%; justify-content: center; }
+  .barras { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; margin-bottom: 36px; }
+  .barra-topo { display: flex; justify-content: space-between; font-size: .92rem; margin-bottom: 6px; }
+  .barra { height: 8px; background: rgba(255,255,255,.15); border-radius: 99px; overflow: hidden; }
+  .barra i { display: block; height: 100%; background: #d9c7a3; border-radius: 99px; }
+  .elogios { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+  .elogios span {
+    border: 1px solid rgba(255,255,255,.3); padding: 6px 14px; border-radius: 999px; font-size: .9rem;
+  }
+  .depoimento {
+    margin: 0; background: rgba(255,255,255,.07); border-left: 3px solid #d9c7a3;
+    padding: 18px 22px; border-radius: 0 var(--raio) var(--raio) 0;
+  }
+  .depoimento p { margin: 0 0 6px; font-family: "Fraunces", serif; font-size: 1.2rem; }
+  .depoimento cite { font-style: normal; font-size: .88rem; color: #cfdcd4; }
+  .avaliacoes .nota-rodape { color: #a9bdb1; }
+
+  /* Localização */
+  .local-grade { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0; }
+  .card-mapa {
+    background: var(--papel); border-radius: var(--raio); overflow: hidden;
+    border: 1px solid var(--linha); box-shadow: 0 10px 30px rgba(31,58,46,.08);
+  }
+  .card-mapa iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+  .local-info { padding: 32px; }
+  .local-info address { font-style: normal; margin-bottom: 20px; }
+  .distancias { list-style: none; padding: 0; margin: 0 0 24px; }
+  .distancias li {
+    display: flex; justify-content: space-between; padding: 10px 0;
+    border-bottom: 1px dashed var(--linha); font-size: .95rem;
+  }
+  .distancias b { color: var(--verde); }
+
+  /* Informações úteis */
+  .regras { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .regra { background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px 22px; }
+  .regra h3 { font-family: "Inter", sans-serif; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--terracota); margin-bottom: 6px; }
+  .regra p { margin: 0; }
+
+  /* Rodapé */
+  footer { background: #142820; color: #cfdcd4; padding: 56px 0 90px; font-size: .95rem; }
+  footer .container { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
+  footer h3 { color: #fff; font-size: 1.2rem; margin-bottom: 12px; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: #fff; text-decoration: underline; }
+  .copyright { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 18px; font-size: .82rem; }
+
+  /* WhatsApp flutuante */
+  .whats-flutuante {
+    position: fixed; right: 18px; bottom: 18px; z-index: 60;
+    width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp);
+    display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,.25);
+  }
+  .whats-flutuante svg { width: 30px; height: 30px; fill: #fff; }
+
+  /* Celular */
+  @media (max-width: 860px) {
+    nav { display: none; }
+    section { padding: 64px 0; }
+    .cafe-grade, .aval-grade, .local-grade { grid-template-columns: 1fr; gap: 28px; }
+    .quartos-fotos { grid-template-columns: 1fr 1fr; }
+    .quartos-fotos img:first-child { grid-column: span 2; grid-row: auto; aspect-ratio: 4/3; }
+    .barras { grid-template-columns: 1fr; }
+    .card-mapa iframe { min-height: 300px; }
+    .local-info { padding: 24px; }
+    footer .container { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    header .botao { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="marca" href="#inicio">Bosque <span>das</span> Araucárias</a>
+    <nav>
+      <a href="#quartos">Quartos</a>
+      <a href="#cafe">Café da manhã</a>
+      <a href="#fotos">Fotos</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#localizacao">Localização</a>
+    </nav>
+    <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Reservar</a>
+  </div>
+</header>
+
+<!-- CAPA -->
+<section class="capa" id="inicio">
+  <div class="container">
+    <a class="selo-nota" href="#avaliacoes"><b>9,2</b> Fantástico no Booking · 261 avaliações</a>
+    <h1>Pousada Bosque das Araucárias</h1>
+    <p>Em Campos do Jordão, com vista para as montanhas da Serra da Mantiqueira, quartos aquecidos e café da manhã em buffet.</p>
+    <div class="botoes">
+      <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Ver disponibilidade no Booking</a>
+      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUES (comodidades listadas no Booking) -->
+<div class="destaques">
+  <div class="container">
+    <ul>
+      <li><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>Wi-Fi grátis</li>
+      <li><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>Estacionamento privativo grátis</li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l14 10M19 7 5 17"/></svg>Quartos com aquecimento</li>
+      <li><svg viewBox="0 0 24 24"><path d="M4 10h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-5ZM17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 3v4M12 3v4"/></svg>Café da manhã em buffet</li>
+      <li><svg viewBox="0 0 24 24"><path d="m2 20 7-11 4 6 3-4 6 9H2Z"/></svg>Vista para as montanhas</li>
+    </ul>
+  </div>
+</div>
+
+<!-- QUARTOS (tipos de quarto conforme o Booking) -->
+<section id="quartos">
+  <div class="container">
+    <div class="sobretitulo">Acomodações</div>
+    <h2>Quartos para descansar de verdade</h2>
+    <p class="intro">Todos com banheiro privativo, produtos de banho de cortesia e roupa de cama. Há opções com varanda.</p>
+
+    <div class="quartos-fotos">
+      <img src="fotos/quarto-vermelho.jpg" alt="Quarto com cama de casal, mesa redonda e cadeiras de madeira">
+      <img src="fotos/quarto-casal.jpg" alt="Quarto de casal com janela e cortinas">
+      <img src="fotos/quarto-vermelho-2.jpg" alt="Quarto com cama de casal e mesa para refeições">
+      <img src="fotos/quarto-entrada.jpg" alt="Entrada do quarto com cabideiro e acesso ao banheiro">
+      <img src="fotos/banheiro.jpg" alt="Banheiro com box de vidro">
+    </div>
+
+    <div class="tipos">
+      <div class="tipo">
+        <h3>Duplo com Varanda</h3>
+        <p>1 cama de casal grande</p>
+        <span class="etiqueta">Com varanda</span>
+      </div>
+      <div class="tipo">
+        <h3>Duplo</h3>
+        <p>1 cama de casal grande</p>
+      </div>
+      <div class="tipo">
+        <h3>Triplo com Varanda</h3>
+        <p>1 cama de casal e 1 cama de solteiro</p>
+        <span class="etiqueta">Com varanda</span>
+      </div>
+      <div class="tipo">
+        <h3>Triplo</h3>
+        <p>1 cama de casal e 1 cama de solteiro</p>
+      </div>
+    </div>
+    <p class="nota-rodape">Preços e disponibilidade das datas que você escolher aparecem no <a href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Booking.com</a>.</p>
+  </div>
+</section>
+
+<!-- CAFÉ DA MANHÃ -->
+<section class="cafe" id="cafe">
+  <div class="container cafe-grade">
+    <div>
+      <div class="sobretitulo">Café da manhã</div>
+      <h2>Bom dia começa na mesa</h2>
+      <p class="intro">Café da manhã continental em buffet, servido no salão da pousada, com pães, frutas e sucos.</p>
+      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316" target="_blank" rel="noopener">Tirar dúvidas no WhatsApp</a>
+    </div>
+    <div class="cafe-fotos">
+      <img src="fotos/cafe-buffet.jpg" alt="Mesa de buffet do café da manhã com pães, frutas e sucos">
+      <img src="fotos/salao-cafe.jpg" alt="Salão do café com mesas e sofá">
+      <img src="fotos/cafe-buffet-2.jpg" alt="Buffet do café da manhã com bolos e frutas">
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="fotos">
+  <div class="container">
+    <div class="sobretitulo">Fotos</div>
+    <h2>Conheça a pousada</h2>
+    <p class="intro">Toque em uma foto para ampliar.</p>
+    <div class="galeria" id="galeria"></div>
+  </div>
+</section>
+
+<dialog id="visor">
+  <button class="fechar" aria-label="Fechar">&times;</button>
+  <img id="visor-img" alt="">
+  <p id="visor-legenda"></p>
+</dialog>
+
+<!-- AVALIACOES — dados do Booking.com em 31/10/2026; atualizar à mão quando mudar -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="container">
+    <div class="sobretitulo" style="color:#d9c7a3">Avaliações</div>
+    <h2>O que dizem nossos hóspedes</h2>
+    <p class="intro">Notas dadas por hóspedes que se hospedaram pelo Booking.com.</p>
+
+    <div class="aval-grade">
+      <div class="nota-grande">
+        <div class="numero">9,2</div>
+        <div class="rotulo">Fantástico</div>
+        <small>261 avaliações no Booking.com</small>
+        <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html#tab-reviews" target="_blank" rel="noopener">Ler todas as avaliações</a>
+      </div>
+
+      <div>
+        <div class="barras" id="barras"></div>
+
+        <p style="margin:0 0 12px;font-weight:600">Os hóspedes mais elogiam</p>
+        <div class="elogios">
+          <span>A vista das montanhas</span>
+          <span>O atendimento</span>
+          <span>O café da manhã</span>
+          <span>A limpeza</span>
+          <span>A cama confortável</span>
+          <span>O quarto aquecido</span>
+        </div>
+
+        <!-- Depoimentos: a família pode acrescentar outros comentários do Booking aqui -->
+        <blockquote class="depoimento">
+          <p>“Quarto confortável e limpo, ótimo café da manhã, silencioso para dormir.”</p>
+          <cite>Lais, Brasil · hóspede pelo Booking.com</cite>
+        </blockquote>
+      </div>
+    </div>
+    <p class="nota-rodape">Dados do Booking.com consultados em 31/10/2026.</p>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section id="localizacao">
+  <div class="container">
+    <div class="sobretitulo">Localização</div>
+    <h2>Como chegar</h2>
+    <p class="intro">Num ponto alto e tranquilo de Campos do Jordão, perto do Belvedere e a poucos minutos de carro de Capivari.</p>
+
+    <div class="card-mapa local-grade">
+      <iframe
+        title="Mapa da Pousada Bosque das Araucárias"
+        src="https://maps.google.com/maps?q=Avenida%20Doutor%20Irineu%20Gon%C3%A7alves%20da%20Silva%2C%202520%2C%20Campos%20do%20Jord%C3%A3o%20-%20SP%2C%2012460-000&z=15&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="local-info">
+        <address>
+          <strong>Pousada Bosque das Araucárias</strong><br>
+          Av. Dr. Irineu Gonçalves da Silva, 2520<br>
+          Campos do Jordão · SP · CEP 12460-000
+        </address>
+        <ul class="distancias">
+          <li>Belvedere (mirante) <b>1,8 km</b></li>
+          <li>Capivari <b>4,9 km</b></li>
+          <li>Parque Horto Florestal <b>10,9 km</b></li>
+        </ul>
+        <a class="botao botao-booking" style="background:var(--verde)" href="https://www.google.com/maps/dir/?api=1&destination=Avenida%20Doutor%20Irineu%20Gon%C3%A7alves%20da%20Silva%2C%202520%2C%20Campos%20do%20Jord%C3%A3o%20-%20SP" target="_blank" rel="noopener">Abrir rota no Google Maps</a>
+        <p class="nota-rodape">Distâncias informadas pelo Booking.com.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFORMAÇÕES ÚTEIS (políticas do Booking) -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sobretitulo">Antes de vir</div>
+    <h2 style="margin-bottom:28px">Informações úteis</h2>
+    <div class="regras">
+      <div class="regra"><h3>Entrada</h3><p>Das 14h às 23h30</p></div>
+      <div class="regra"><h3>Saída</h3><p>Até as 12h</p></div>
+      <div class="regra"><h3>Horário limite</h3><p>Entrada fechada entre 23h30 e 7h. Avise o horário de chegada.</p></div>
+      <div class="regra"><h3>Crianças</h3><p>Bem-vindas. Berço grátis até 2 anos, mediante pedido.</p></div>
+      <div class="regra"><h3>Silêncio</h3><p>Das 21h às 7h</p></div>
+      <div class="regra"><h3>Pets</h3><p>Não são permitidos.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <h3>Pousada Bosque das Araucárias</h3>
+      <p style="margin:0">Av. Dr. Irineu Gonçalves da Silva, 2520<br>Campos do Jordão · SP</p>
+    </div>
+    <div>
+      <h3>Contato</h3>
+      <ul>
+        <li><a href="https://wa.me/5512997881316" target="_blank" rel="noopener">WhatsApp (12) 99788-1316</a></li>
+        <!-- E-mail vindo do site antigo: confirmar se ainda funciona -->
+        <li><a href="mailto:reservas@pousadabosquedasaraucarias.com.br">reservas@pousadabosquedasaraucarias.com.br</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Siga e reserve</h3>
+      <ul>
+        <li><a href="https://www.instagram.com/pousada_bosque_das_araucarias/" target="_blank" rel="noopener">Instagram @pousada_bosque_das_araucarias</a></li>
+        <li><a href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Reservar pelo Booking.com</a></li>
+      </ul>
+    </div>
+    <p class="copyright">© 2026 Pousada Bosque das Araucárias · Campos do Jordão, SP</p>
+  </div>
+</footer>
+
+<a class="whats-flutuante" href="https://wa.me/5512997881316" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+</a>
+
+<script>
+  // Notas por categoria — Booking.com, 31/10/2026
+  const NOTAS = [
+    ["Funcionários", 9.8],
+    ["Limpeza", 9.3],
+    ["Conforto", 9.3],
+    ["Comodidades", 9.2],
+    ["Custo-benefício", 9.2],
+    ["Localização", 9.0],
+    ["Wi-Fi grátis", 10],
+  ];
+
+  // Fotos da galeria: [arquivo, legenda]
+  const FOTOS = [
+    ["vista-sacada.jpg", "Vista da sacada para as montanhas"],
+    ["vista-janela.jpg", "Vista da janela do quarto"],
+    ["fachada-noite.jpg", "A pousada à noite"],
+    ["araucaria-por-do-sol.jpg", "Araucária ao pôr do sol"],
+    ["quarto-casal.jpg", "Quarto de casal"],
+    ["quarto-vermelho.jpg", "Quarto com mesa e cadeiras"],
+    ["vista-cortina.jpg", "Vista pela janela"],
+    ["cafe-buffet.jpg", "Buffet do café da manhã"],
+    ["salao-cafe.jpg", "Salão do café"],
+    ["copa.jpg", "Copa"],
+    ["corredor.jpg", "Corredor dos quartos"],
+    ["hall.jpg", "Hall dos quartos"],
+    ["pia.jpg", "Detalhe do banheiro"],
+  ];
+
+  const barras = document.getElementById("barras");
+  for (const [nome, nota] of NOTAS) {
+    barras.insertAdjacentHTML("beforeend", `
+      <div>
+        <div class="barra-topo"><span>${nome}</span><b>${nota.toLocaleString("pt-BR", { minimumFractionDigits: nota < 10 ? 1 : 0 })}</b></div>
+        <div class="barra"><i style="width:${nota * 10}%"></i></div>
+      </div>`);
+  }
+
+  const galeria = document.getElementById("galeria");
+  const visor = document.getElementById("visor");
+  const visorImg = document.getElementById("visor-img");
+  const visorLegenda = document.getElementById("visor-legenda");
+
+  for (const [arquivo, legenda] of FOTOS) {
+    const botao = document.createElement("button");
+    botao.innerHTML = `<img src="fotos/${arquivo}" alt="${legenda}" loading="lazy">`;
+    botao.addEventListener("click", () => {
+      visorImg.src = `fotos/${arquivo}`;
+      visorImg.alt = legenda;
+      visorLegenda.textContent = legenda;
+      visor.showModal();
+    });
+    galeria.append(botao);
+  }
+
+  visor.addEventListener("click", () => visor.close());
+</script>
+</body>
+</html>
