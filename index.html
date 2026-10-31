@@ -269,7 +269,7 @@
   .regra p { margin: 0; }
 
   /* Rodapé */
-  footer { background: #142820; color: #cfdcd4; padding: 56px 0 90px; font-size: .95rem; }
+  footer { background: #142820; color: #cfdcd4; padding: 56px 0 120px; font-size: .95rem; }
   footer .container { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
   footer h3 { color: #fff; font-size: 1.2rem; margin-bottom: 12px; }
   .logo-rodape { height: 72px; width: auto; margin-bottom: 14px; }
@@ -280,11 +280,49 @@
 
   /* WhatsApp flutuante */
   .whats-flutuante {
-    position: fixed; right: 18px; bottom: 18px; z-index: 60;
+    position: fixed; right: 14px; bottom: 14px; z-index: 60;
+    display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none;
+  }
+  .whats-flutuante .circulo {
     width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp);
     display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,.25);
   }
   .whats-flutuante svg { width: 30px; height: 30px; fill: #fff; }
+  .whats-flutuante .rotulo {
+    background: var(--verde); color: #fff; font-size: .74rem; font-weight: 600; white-space: nowrap;
+    padding: 4px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+
+  /* Reserva direta */
+  .reserva { background: var(--papel); }
+  .reserva-grade { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: start; }
+  .gestora {
+    display: flex; align-items: center; gap: 14px; margin: 24px 0;
+    background: var(--creme); border: 1px solid var(--linha); border-radius: var(--raio); padding: 16px 18px;
+  }
+  .gestora .inicial {
+    width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center;
+    background: var(--verde); color: #fff; font-family: "Fraunces", serif; font-size: 1.4rem;
+  }
+  .gestora strong { display: block; color: var(--verde); }
+  .gestora span { font-size: .9rem; color: var(--texto-suave); }
+  .passos { margin: 0; padding-left: 20px; color: var(--texto-suave); font-size: .95rem; display: grid; gap: 6px; }
+  .formulario {
+    background: var(--creme); border: 1px solid var(--linha); border-radius: var(--raio); padding: 26px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .campo { display: grid; gap: 6px; }
+  .campo.inteiro { grid-column: 1 / -1; }
+  .campo label { font-size: .85rem; font-weight: 600; color: var(--verde); }
+  .campo input, .campo select, .campo textarea {
+    font: inherit; font-size: .95rem; color: var(--texto); background: #fff;
+    border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; width: 100%;
+  }
+  .campo input:focus, .campo select:focus, .campo textarea:focus { outline: 2px solid var(--verde-claro); border-color: transparent; }
+  .formulario .botao { grid-column: 1 / -1; justify-content: center; border: 0; cursor: pointer; font-family: inherit; }
+  .erro-form { grid-column: 1 / -1; margin: 0; color: #a3341c; font-size: .9rem; font-weight: 600; }
+  .erro-form:empty { display: none; }
+  .aviso-form { grid-column: 1 / -1; margin: 0; font-size: .82rem; color: var(--texto-suave); }
 
   /* Celular */
   @media (max-width: 860px) {
@@ -297,6 +335,12 @@
     .card-mapa iframe { min-height: 300px; }
     .local-info { padding: 24px; }
     footer .container { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .reserva-grade { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 520px) {
+    .formulario { grid-template-columns: 1fr; padding: 20px; }
   }
   @media (max-width: 420px) {
     header .botao { display: none; }
@@ -313,6 +357,7 @@
       <a href="#cafe">Café da manhã</a>
       <a href="#fotos">Fotos</a>
       <a href="#avaliacoes">Avaliações</a>
+      <a href="#reserva-direta">Reserva direta</a>
       <a href="#localizacao">Localização</a>
       <a href="#passeios">O que fazer</a>
     </nav>
@@ -385,6 +430,77 @@
       </div>
     </div>
     <p class="nota-rodape">Preços e disponibilidade das datas que você escolher aparecem no <a href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Booking.com</a>.</p>
+  </div>
+</section>
+
+<!-- RESERVA DIRETA: o formulário só monta uma mensagem de WhatsApp.
+     Nada é confirmado aqui: a gestora confere e bloqueia a data no Booking antes de confirmar. -->
+<section class="reserva" id="reserva-direta">
+  <div class="container reserva-grade">
+    <div>
+      <div class="sobretitulo">Reserva direta</div>
+      <h2>Reserve direto com a gente</h2>
+      <p class="intro" style="margin-bottom:0">Prefere falar com a pousada? Preencha o pedido e ele chega pronto no nosso WhatsApp.</p>
+      <div class="gestora">
+        <div class="inicial" aria-hidden="true">W</div>
+        <div>
+          <strong>Walkira Tozi</strong>
+          <span>Gestora de Reservas · WhatsApp (12) 99788-1316</span>
+        </div>
+      </div>
+      <ol class="passos">
+        <li>Você envia o pedido com as datas e o quarto.</li>
+        <li>A Walkira confere a disponibilidade.</li>
+        <li>Ela responde pelo WhatsApp para confirmar a reserva.</li>
+      </ol>
+    </div>
+
+    <form class="formulario" id="form-reserva" novalidate>
+      <div class="campo">
+        <label for="entrada">Entrada</label>
+        <input type="date" id="entrada" required>
+      </div>
+      <div class="campo">
+        <label for="saida">Saída</label>
+        <input type="date" id="saida" required>
+      </div>
+      <div class="campo">
+        <label for="adultos">Adultos</label>
+        <select id="adultos">
+          <option>1</option><option selected>2</option><option>3</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="criancas">Crianças</label>
+        <select id="criancas">
+          <option selected>0</option><option>1</option><option>2</option>
+        </select>
+      </div>
+      <div class="campo inteiro">
+        <label for="quarto">Quarto</label>
+        <select id="quarto">
+          <option>Sem preferência</option>
+          <option>Duplo com Varanda</option>
+          <option>Duplo</option>
+          <option>Triplo com Varanda</option>
+          <option>Triplo</option>
+        </select>
+      </div>
+      <div class="campo inteiro">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" autocomplete="name" required>
+      </div>
+      <div class="campo inteiro">
+        <label for="observacoes">Observações (opcional)</label>
+        <textarea id="observacoes" rows="2" placeholder="Ex.: horário previsto de chegada, berço para bebê"></textarea>
+      </div>
+      <p class="erro-form" id="erro-reserva" role="alert"></p>
+      <button class="botao botao-whatsapp" type="submit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+        Enviar pedido pelo WhatsApp
+      </button>
+      <p class="aviso-form">Este é um pedido de reserva. A reserva só está garantida depois da confirmação da pousada.</p>
+    </form>
   </div>
 </section>
 
@@ -552,6 +668,7 @@
     <div>
       <h3>Contato</h3>
       <ul>
+        <li>Walkira Tozi · Gestora de Reservas</li>
         <li><a href="https://wa.me/5512997881316" target="_blank" rel="noopener">WhatsApp (12) 99788-1316</a></li>
         <!-- E-mail vindo do site antigo: confirmar se ainda funciona -->
         <li><a href="mailto:reservas@pousadabosquedasaraucarias.com.br">reservas@pousadabosquedasaraucarias.com.br</a></li>
@@ -568,8 +685,9 @@
   </div>
 </footer>
 
-<a class="whats-flutuante" href="https://wa.me/5512997881316" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+<a class="whats-flutuante" href="https://wa.me/5512997881316?text=Ol%C3%A1%2C%20Walkira!%20Gostaria%20de%20reservar%20direto%20com%20a%20pousada." target="_blank" rel="noopener" aria-label="Reserve direto com a gente pelo WhatsApp">
+  <span class="circulo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>
+  <span class="rotulo">Reserve direto com a gente</span>
 </a>
 
 <script>
@@ -734,6 +852,50 @@
 
   // Comentários
   criarCarrossel(document.getElementById("carrossel-depoimentos"));
+
+  // Reserva direta: valida o pedido e abre o WhatsApp com a mensagem pronta
+  const WHATSAPP_RESERVAS = "5512997881316";
+  const formReserva = document.getElementById("form-reserva");
+  const campoEntrada = document.getElementById("entrada");
+  const campoSaida = document.getElementById("saida");
+  const erroReserva = document.getElementById("erro-reserva");
+
+  const hoje = new Date().toLocaleDateString("en-CA"); // AAAA-MM-DD no fuso do visitante
+  campoEntrada.min = hoje;
+  campoSaida.min = hoje;
+  campoEntrada.addEventListener("change", () => (campoSaida.min = campoEntrada.value || hoje));
+
+  const dataBR = (iso) => iso.split("-").reverse().join("/");
+
+  formReserva.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const entrada = campoEntrada.value;
+    const saida = campoSaida.value;
+    const nome = document.getElementById("nome").value.trim();
+
+    if (!entrada || !saida) return (erroReserva.textContent = "Escolha as datas de entrada e de saída.");
+    if (entrada < hoje) return (erroReserva.textContent = "A data de entrada não pode estar no passado.");
+    if (saida <= entrada) return (erroReserva.textContent = "A saída precisa ser depois da entrada.");
+    if (!nome) return (erroReserva.textContent = "Informe seu nome.");
+    erroReserva.textContent = "";
+
+    const noites = Math.round((new Date(saida) - new Date(entrada)) / 86400000);
+    const observacoes = document.getElementById("observacoes").value.trim();
+    const linhas = [
+      "Olá, Walkira! Gostaria de fazer um pedido de reserva direta:",
+      "",
+      `Nome: ${nome}`,
+      `Entrada: ${dataBR(entrada)}`,
+      `Saída: ${dataBR(saida)} (${noites} ${noites === 1 ? "noite" : "noites"})`,
+      `Adultos: ${document.getElementById("adultos").value}`,
+      `Crianças: ${document.getElementById("criancas").value}`,
+      `Quarto: ${document.getElementById("quarto").value}`,
+    ];
+    if (observacoes) linhas.push(`Observações: ${observacoes}`);
+
+    const url = `https://wa.me/${WHATSAPP_RESERVAS}?text=${encodeURIComponent(linhas.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+  });
 </script>
 </body>
 </html>

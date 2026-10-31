@@ -30,6 +30,9 @@ python3 -m http.server 8765    # depois abrir http://127.0.0.1:8765
 - **Galeria (carrossel):** lista `FOTOS` no JavaScript (arquivo + legenda), na ordem em que aparecem.
 - **Comentários (carrossel):** copiar um `<blockquote class="depoimento">` inteiro na seção de avaliações e trocar texto e nome.
 - **O que fazer:** lista `PASSEIOS` no JavaScript (nome, distância, descrição, busca no mapa).
+- **Reserva direta:** o formulário só monta uma mensagem de WhatsApp para a gestora de reservas
+  (Walkira Tozi, constante `WHATSAPP_RESERVAS`). Nada é confirmado pelo site. **Regra para evitar overbooking:**
+  só confirmar ao hóspede depois de bloquear a data no painel do Booking.
 - **Publicar:** `git add . && git commit -m "..." && git push`. O site atualiza em ~1 minuto.
 
 ## Fontes dos dados
