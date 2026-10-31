@@ -7,8 +7,11 @@ Site da Pousada Bosque das Araucárias (Campos do Jordão, SP).
 ## Estrutura
 
 ```
-index.html   página única (HTML + CSS + um pouco de JavaScript)
-fotos/       fotos otimizadas (máx. 1600 px, sem metadados)
+index.html       página única (HTML + CSS + um pouco de JavaScript)
+fotos/           fotos otimizadas (máx. 1600 px, sem metadados)
+logo.jpg         logo original enviado pela família
+logo-claro.png   logo em creme, fundo transparente (topo e rodapé verdes)
+favicon.png      ícone da aba do navegador
 ```
 
 Não há framework, build nem dependências. O GitHub Pages publica o `index.html` como está.
@@ -24,7 +27,9 @@ python3 -m http.server 8765    # depois abrir http://127.0.0.1:8765
 ## Atualizar conteúdo
 
 - **Nota e avaliações do Booking:** seção `AVALIACOES` no HTML e a lista `NOTAS` no JavaScript.
-- **Galeria:** lista `FOTOS` no JavaScript (arquivo + legenda).
+- **Galeria (carrossel):** lista `FOTOS` no JavaScript (arquivo + legenda), na ordem em que aparecem.
+- **Comentários (carrossel):** copiar um `<blockquote class="depoimento">` inteiro na seção de avaliações e trocar texto e nome.
+- **O que fazer:** lista `PASSEIOS` no JavaScript (nome, distância, descrição, busca no mapa).
 - **Publicar:** `git add . && git commit -m "..." && git push`. O site atualiza em ~1 minuto.
 
 ## Fontes dos dados
@@ -32,6 +37,14 @@ python3 -m http.server 8765    # depois abrir http://127.0.0.1:8765
 - Nota, avaliações, tipos de quarto, regras e distâncias: [página da pousada no Booking.com](https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html), consultada em 31/10/2026.
 - WhatsApp e Instagram: informados pela família.
 - E-mail e endereço: site antigo (e-mail a confirmar).
+- "O que fazer", consultado em 31/10/2026:
+  - Distâncias: lista "Proximidades da acomodação" do Booking.com (Vila Capivari: texto de descrição do Booking).
+    O Booking dá 10,9 km para o Horto Florestal na descrição e 16 km na lista de proximidades; usamos a lista.
+  - Parque Estadual / Horto: [SEMIL-SP](https://semil.sp.gov.br/12/parque-estadual-de-campos-do-jordao/).
+  - Museu Felícia Leirner e Auditório Claudio Santoro: [site oficial](https://museufelicialeirner.org.br/exposicao-museu-visto-de-cima).
+  - Palácio Boa Vista, Amantikir, teleférico, Capivari, Pico do Imbiri e Parque das Cerejeiras: guias e notícias de turismo
+    (Guia da Semana, Melhores Destinos, Diário do Turismo, Gazeta SP, Wikivoyage).
+  - Fora da lista: trem da EFCJ (operação incerta em 2026) e Cachoeira Véu da Noiva (fontes fracas).
 
 ## Antes do lançamento
 

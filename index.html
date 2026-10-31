@@ -6,15 +6,18 @@
 <!-- PROTÓTIPO: impede o Google de indexar a pré-visualização. Remover no lançamento. -->
 <meta name="robots" content="noindex, nofollow">
 <title>Pousada Bosque das Araucárias · Campos do Jordão</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <meta name="description" content="Pousada em Campos do Jordão (SP) com vista para as montanhas, café da manhã em buffet, Wi-Fi e estacionamento grátis. Nota 9,2 no Booking.com.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <!--
-  PROTÓTIPO v1 (31/10/2026)
+  PROTÓTIPO v2 (31/10/2026)
   Fontes dos dados:
     - Nota, avaliações, quartos, regras e distâncias: página da pousada no Booking.com,
       consultada em 31/10/2026: https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html
+    - "O que fazer": distâncias da lista "Proximidades" do Booking; descrições de
+      SEMIL-SP, Museu Felícia Leirner e guias de turismo (ver README).
     - WhatsApp e Instagram: links enviados pelo Henrique (31/10/2026).
     - E-mail e endereço: site antigo (pousadabosquedasaraucarias.com.br). E-mail A CONFIRMAR.
   Para atualizar a nota/avaliações: editar a seção "AVALIACOES" mais abaixo.
@@ -75,7 +78,11 @@
     color: #fff;
   }
   header .container { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-  .marca { font-family: "Fraunces", serif; font-size: 1.15rem; text-decoration: none; white-space: nowrap; }
+  .marca {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "Fraunces", serif; font-size: 1.15rem; text-decoration: none; white-space: nowrap;
+  }
+  .marca img { height: 40px; width: auto; }
   .marca span { color: #d9c7a3; }
   nav { display: flex; gap: 26px; font-size: .92rem; }
   nav a { text-decoration: none; opacity: .85; }
@@ -138,18 +145,50 @@
   .cafe-fotos img { border-radius: var(--raio); aspect-ratio: 1; object-fit: cover; width: 100%; }
   .cafe-fotos img:first-child { grid-column: span 2; aspect-ratio: 16/10; }
 
+  /* Carrossel (fotos e comentários) */
+  .carrossel { position: relative; }
+  .carrossel-janela { overflow: hidden; border-radius: var(--raio); }
+  .trilho { display: flex; transition: transform .45s ease; }
+  .trilho > * { flex: 0 0 100%; min-width: 0; }
+  .seta {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 46px; height: 46px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255, 253, 249, .92); color: var(--verde);
+    display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  }
+  .seta:hover { background: #fff; }
+  .seta[hidden] { display: none; }
+  .seta svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .seta.anterior { left: 12px; }
+  .seta.proxima { right: 12px; }
+
   /* Galeria */
-  .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
-  .galeria button {
-    padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; overflow: hidden;
+  .foto-slide { margin: 0; position: relative; background: var(--verde); height: min(clamp(240px, 56vw, 600px), 70vh); }
+  .foto-slide img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+  .foto-slide figcaption {
+    position: absolute; inset: auto 0 0 0; padding: 32px 20px 14px; color: #fff; font-size: .95rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .55));
   }
-  .galeria img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform .3s; }
-  .galeria button:hover img { transform: scale(1.04); }
+  #carrossel-fotos .contador {
+    position: absolute; top: 12px; right: 12px; z-index: 2;
+    background: rgba(0, 0, 0, .5); color: #fff; font-size: .82rem; padding: 3px 10px; border-radius: 999px;
+  }
+  .miniaturas { position: relative; display: flex; gap: 8px; overflow-x: auto; padding: 12px 2px 4px; }
+  .miniaturas button {
+    flex: 0 0 auto; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+    background: none; cursor: pointer; opacity: .55; transition: opacity .2s;
+  }
+  .miniaturas button:hover { opacity: .85; }
+  .miniaturas button[aria-current="true"] { border-color: var(--verde); opacity: 1; }
+  .miniaturas img { width: 92px; height: 66px; object-fit: cover; }
+
+  /* Foto ampliada */
   dialog {
-    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh;
+    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 92vh; overflow: visible;
   }
-  dialog::backdrop { background: rgba(10, 18, 14, .9); }
-  dialog img { max-height: 86vh; border-radius: 8px; margin: auto; }
+  dialog::backdrop { background: rgba(10, 18, 14, .92); }
+  dialog img { max-height: 84vh; max-width: 90vw; border-radius: 8px; margin: auto; }
+  dialog .seta { position: fixed; }
   dialog p { color: #fff; text-align: center; margin: 10px 0 0; font-size: .95rem; }
   .fechar {
     position: fixed; top: 16px; right: 20px; font-size: 2rem; color: #fff;
@@ -185,6 +224,26 @@
   }
   .depoimento p { margin: 0 0 6px; font-family: "Fraunces", serif; font-size: 1.2rem; }
   .depoimento cite { font-style: normal; font-size: .88rem; color: #cfdcd4; }
+  .depoimentos .carrossel-janela { border-radius: 0; }
+  .controles { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+  .controles .seta { position: static; transform: none; width: 40px; height: 40px; }
+  .controles .contador { font-size: .9rem; color: #cfdcd4; min-width: 3.5em; text-align: center; }
+
+  /* O que fazer */
+  .passeios-secao { background: var(--papel); }
+  .passeios { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .passeio {
+    background: var(--creme); border: 1px solid var(--linha); border-radius: var(--raio);
+    padding: 22px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .passeio .distancia {
+    align-self: flex-start; font-size: .8rem; font-weight: 600; color: var(--verde);
+    background: #e3ebe5; padding: 2px 10px; border-radius: 999px;
+  }
+  .passeio h3 { font-size: 1.15rem; color: var(--verde); }
+  .passeio p { margin: 0; color: var(--texto-suave); font-size: .93rem; flex: 1; }
+  .passeio a { font-size: .88rem; font-weight: 600; color: var(--terracota); text-decoration: none; }
+  .passeio a:hover { text-decoration: underline; }
   .avaliacoes .nota-rodape { color: #a9bdb1; }
 
   /* Localização */
@@ -213,6 +272,7 @@
   footer { background: #142820; color: #cfdcd4; padding: 56px 0 90px; font-size: .95rem; }
   footer .container { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
   footer h3 { color: #fff; font-size: 1.2rem; margin-bottom: 12px; }
+  .logo-rodape { height: 72px; width: auto; margin-bottom: 14px; }
   footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
   footer a { text-decoration: none; }
   footer a:hover { color: #fff; text-decoration: underline; }
@@ -247,13 +307,14 @@
 
 <header>
   <div class="container">
-    <a class="marca" href="#inicio">Bosque <span>das</span> Araucárias</a>
+    <a class="marca" href="#inicio"><img src="logo-claro.png" alt="">Bosque <span>das</span> Araucárias</a>
     <nav>
       <a href="#quartos">Quartos</a>
       <a href="#cafe">Café da manhã</a>
       <a href="#fotos">Fotos</a>
       <a href="#avaliacoes">Avaliações</a>
       <a href="#localizacao">Localização</a>
+      <a href="#passeios">O que fazer</a>
     </nav>
     <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Reservar</a>
   </div>
@@ -349,15 +410,25 @@
   <div class="container">
     <div class="sobretitulo">Fotos</div>
     <h2>Conheça a pousada</h2>
-    <p class="intro">Toque em uma foto para ampliar.</p>
-    <div class="galeria" id="galeria"></div>
+    <p class="intro">Use as setas ou deslize para ver todas as fotos. Toque na foto para ampliar.</p>
+    <div class="carrossel" id="carrossel-fotos">
+      <div class="carrossel-janela">
+        <div class="trilho"></div>
+      </div>
+      <span class="contador"></span>
+      <button class="seta anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="seta proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="miniaturas" id="miniaturas"></div>
   </div>
 </section>
 
 <dialog id="visor">
   <button class="fechar" aria-label="Fechar">&times;</button>
+  <button class="seta anterior" id="visor-anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
   <img id="visor-img" alt="">
   <p id="visor-legenda"></p>
+  <button class="seta proxima" id="visor-proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </dialog>
 
 <!-- AVALIACOES — dados do Booking.com em 31/10/2026; atualizar à mão quando mudar -->
@@ -388,11 +459,27 @@
           <span>O quarto aquecido</span>
         </div>
 
-        <!-- Depoimentos: a família pode acrescentar outros comentários do Booking aqui -->
+        <!-- Comentários de hóspedes do Booking.com, em carrossel.
+             Para acrescentar um: copiar um <blockquote> inteiro e trocar o texto e o nome. -->
+        <div class="carrossel depoimentos" id="carrossel-depoimentos">
+          <div class="carrossel-janela">
+            <div class="trilho">
         <blockquote class="depoimento">
           <p>“Quarto confortável e limpo, ótimo café da manhã, silencioso para dormir.”</p>
           <cite>Lais, Brasil · hóspede pelo Booking.com</cite>
         </blockquote>
+              <blockquote class="depoimento">
+                <p>“Vista incrível! Quarto com aquecimento (inclusive no banheiro). Atendimento jóia! Adorei a estadia!”</p>
+                <cite>Katia, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+            </div>
+          </div>
+          <div class="controles">
+            <button class="seta anterior" aria-label="Comentário anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <span class="contador"></span>
+            <button class="seta proxima" aria-label="Próximo comentário"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
       </div>
     </div>
     <p class="nota-rodape">Dados do Booking.com consultados em 31/10/2026.</p>
@@ -420,12 +507,22 @@
         <ul class="distancias">
           <li>Belvedere (mirante) <b>1,8 km</b></li>
           <li>Capivari <b>4,9 km</b></li>
-          <li>Parque Horto Florestal <b>10,9 km</b></li>
         </ul>
         <a class="botao botao-booking" style="background:var(--verde)" href="https://www.google.com/maps/dir/?api=1&destination=Avenida%20Doutor%20Irineu%20Gon%C3%A7alves%20da%20Silva%2C%202520%2C%20Campos%20do%20Jord%C3%A3o%20-%20SP" target="_blank" rel="noopener">Abrir rota no Google Maps</a>
         <p class="nota-rodape">Distâncias informadas pelo Booking.com.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- O QUE FAZER EM CAMPOS (cards gerados pela lista PASSEIOS no script) -->
+<section class="passeios-secao" id="passeios">
+  <div class="container">
+    <div class="sobretitulo">Passeios</div>
+    <h2>O que fazer em Campos do Jordão</h2>
+    <p class="intro">Algumas atrações perto da pousada, da mais próxima para a mais distante.</p>
+    <div class="passeios" id="lista-passeios"></div>
+    <p class="nota-rodape">Distâncias aproximadas a partir da pousada, informadas pelo Booking.com. Confira horários e ingressos nos canais oficiais de cada atração antes de ir.</p>
   </div>
 </section>
 
@@ -448,6 +545,7 @@
 <footer>
   <div class="container">
     <div>
+      <img class="logo-rodape" src="logo-claro.png" alt="Logo da Pousada Bosque das Araucárias">
       <h3>Pousada Bosque das Araucárias</h3>
       <p style="margin:0">Av. Dr. Irineu Gonçalves da Silva, 2520<br>Campos do Jordão · SP</p>
     </div>
@@ -486,7 +584,7 @@
     ["Wi-Fi grátis", 10],
   ];
 
-  // Fotos da galeria: [arquivo, legenda]
+  // Fotos da galeria, na ordem do carrossel: [arquivo, legenda]
   const FOTOS = [
     ["vista-sacada.jpg", "Vista da sacada para as montanhas"],
     ["vista-janela.jpg", "Vista da janela do quarto"],
@@ -494,13 +592,45 @@
     ["araucaria-por-do-sol.jpg", "Araucária ao pôr do sol"],
     ["quarto-casal.jpg", "Quarto de casal"],
     ["quarto-vermelho.jpg", "Quarto com mesa e cadeiras"],
+    ["quarto-vermelho-2.jpg", "Quarto com cama de casal"],
+    ["quarto-entrada.jpg", "Entrada do quarto"],
     ["vista-cortina.jpg", "Vista pela janela"],
+    ["banheiro.jpg", "Banheiro"],
+    ["pia.jpg", "Detalhe do banheiro"],
     ["cafe-buffet.jpg", "Buffet do café da manhã"],
+    ["cafe-buffet-2.jpg", "Bolos, pães e frutas no café"],
     ["salao-cafe.jpg", "Salão do café"],
     ["copa.jpg", "Copa"],
     ["corredor.jpg", "Corredor dos quartos"],
     ["hall.jpg", "Hall dos quartos"],
-    ["pia.jpg", "Detalhe do banheiro"],
+  ];
+
+  // O que fazer: [nome, distância (Booking.com), descrição, busca no Google Maps]
+  const PASSEIOS = [
+    ["Parque das Cerejeiras", "2,5 km",
+      "Cerca de 800 cerejeiras. No inverno, entre julho e agosto, recebe a Festa da Cerejeira em Flor, com cultura e culinária japonesas.",
+      "Parque da Cerejeira, Campos do Jordão"],
+    ["Pico do Imbiri", "3,4 km",
+      "Mirante natural a 1.862 m de altitude, com vista da cidade. O acesso é por estrada de terra, que fica difícil em dias de chuva.",
+      "Pico do Imbiri, Campos do Jordão"],
+    ["Teleférico e Morro do Elefante", "4,5 km",
+      "O teleférico do Parque Capivari, em funcionamento desde 1970, sobe até o mirante do Morro do Elefante, a cerca de 1.800 m.",
+      "Teleférico Parque Capivari, Campos do Jordão"],
+    ["Vila Capivari", "4,9 km",
+      "Centro gastronômico e de vida noturna de Campos do Jordão, com sua arquitetura típica.",
+      "Vila Capivari, Campos do Jordão"],
+    ["Parque Amantikir", "5 km",
+      "Parque de jardins temáticos inspirados em diferentes países, aberto em 2007.",
+      "Parque Amantikir, Campos do Jordão"],
+    ["Palácio Boa Vista", "6 km",
+      "Residência oficial de inverno do governo paulista, com acervo de arte aberto a visitas guiadas. Ao lado fica a Capela de São Pedro, projeto de Paulo Mendes da Rocha.",
+      "Palácio Boa Vista, Campos do Jordão"],
+    ["Museu Felícia Leirner e Auditório Claudio Santoro", "8 km",
+      "Esculturas de Felícia Leirner expostas ao ar livre, ao longo de trilhas no jardim do auditório. Os dois foram inaugurados em 1979.",
+      "Museu Felícia Leirner, Campos do Jordão"],
+    ["Parque Estadual (Horto Florestal)", "16 km",
+      "Criado em 1941, protege mata atlântica e floresta de araucárias. Ocupa cerca de um terço do município.",
+      "Parque Estadual Campos do Jordão Horto Florestal"],
   ];
 
   const barras = document.getElementById("barras");
@@ -512,24 +642,98 @@
       </div>`);
   }
 
-  const galeria = document.getElementById("galeria");
+  const listaPasseios = document.getElementById("lista-passeios");
+  for (const [nome, distancia, descricao, busca] of PASSEIOS) {
+    const mapa = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(busca);
+    listaPasseios.insertAdjacentHTML("beforeend", `
+      <article class="passeio">
+        <span class="distancia">${distancia}</span>
+        <h3>${nome}</h3>
+        <p>${descricao}</p>
+        <a href="${mapa}" target="_blank" rel="noopener">Ver no mapa →</a>
+      </article>`);
+  }
+
+  // Carrossel: setas, contador e deslizar com o dedo. Usado nas fotos e nos comentários.
+  function criarCarrossel(raiz, aoMudar) {
+    const trilho = raiz.querySelector(".trilho");
+    const contador = raiz.querySelector(".contador");
+    const total = trilho.children.length;
+    let atual = 0;
+
+    function ir(indice) {
+      atual = (indice + total) % total;
+      trilho.style.transform = `translateX(-${atual * 100}%)`;
+      if (contador) contador.textContent = `${atual + 1} / ${total}`;
+      if (aoMudar) aoMudar(atual);
+    }
+
+    raiz.querySelector(".anterior").addEventListener("click", () => ir(atual - 1));
+    raiz.querySelector(".proxima").addEventListener("click", () => ir(atual + 1));
+    if (total < 2) raiz.querySelectorAll(".seta").forEach((seta) => (seta.hidden = true));
+
+    let inicioX = null;
+    trilho.addEventListener("touchstart", (e) => (inicioX = e.touches[0].clientX), { passive: true });
+    trilho.addEventListener("touchend", (e) => {
+      const deslocamento = e.changedTouches[0].clientX - inicioX;
+      if (Math.abs(deslocamento) > 40) ir(atual + (deslocamento < 0 ? 1 : -1));
+    });
+
+    ir(0);
+    return { ir, atual: () => atual };
+  }
+
+  // Galeria de fotos
+  const trilhoFotos = document.querySelector("#carrossel-fotos .trilho");
+  const miniaturas = document.getElementById("miniaturas");
   const visor = document.getElementById("visor");
   const visorImg = document.getElementById("visor-img");
   const visorLegenda = document.getElementById("visor-legenda");
 
-  for (const [arquivo, legenda] of FOTOS) {
-    const botao = document.createElement("button");
-    botao.innerHTML = `<img src="fotos/${arquivo}" alt="${legenda}" loading="lazy">`;
-    botao.addEventListener("click", () => {
-      visorImg.src = `fotos/${arquivo}`;
-      visorImg.alt = legenda;
-      visorLegenda.textContent = legenda;
-      visor.showModal();
-    });
-    galeria.append(botao);
+  FOTOS.forEach(([arquivo, legenda], i) => {
+    trilhoFotos.insertAdjacentHTML("beforeend", `
+      <figure class="foto-slide">
+        <img src="fotos/${arquivo}" alt="${legenda}" loading="${i === 0 ? "eager" : "lazy"}">
+        <figcaption>${legenda}</figcaption>
+      </figure>`);
+    const miniatura = document.createElement("button");
+    miniatura.setAttribute("aria-label", legenda);
+    miniatura.innerHTML = `<img src="fotos/${arquivo}" alt="" loading="lazy">`;
+    miniatura.addEventListener("click", () => fotos.ir(i));
+    miniaturas.append(miniatura);
+  });
+
+  function mostrarNoVisor(i) {
+    const [arquivo, legenda] = FOTOS[i];
+    visorImg.src = `fotos/${arquivo}`;
+    visorImg.alt = legenda;
+    visorLegenda.textContent = `${legenda} · ${i + 1} / ${FOTOS.length}`;
   }
 
-  visor.addEventListener("click", () => visor.close());
+  const fotos = criarCarrossel(document.getElementById("carrossel-fotos"), (i) => {
+    const ativa = miniaturas.children[i];
+    [...miniaturas.children].forEach((b, j) => b.setAttribute("aria-current", i === j));
+    miniaturas.scrollTo({ left: ativa.offsetLeft - (miniaturas.clientWidth - ativa.clientWidth) / 2, behavior: "smooth" });
+    if (visor.open) mostrarNoVisor(i);
+  });
+
+  trilhoFotos.addEventListener("click", (e) => {
+    if (e.target.tagName !== "IMG") return;
+    mostrarNoVisor(fotos.atual());
+    visor.showModal();
+  });
+  document.getElementById("visor-anterior").addEventListener("click", () => fotos.ir(fotos.atual() - 1));
+  document.getElementById("visor-proxima").addEventListener("click", () => fotos.ir(fotos.atual() + 1));
+  visor.querySelector(".fechar").addEventListener("click", () => visor.close());
+  visor.addEventListener("click", (e) => { if (e.target === visor) visor.close(); });
+  document.addEventListener("keydown", (e) => {
+    if (!visor.open) return;
+    if (e.key === "ArrowLeft") fotos.ir(fotos.atual() - 1);
+    if (e.key === "ArrowRight") fotos.ir(fotos.atual() + 1);
+  });
+
+  // Comentários
+  criarCarrossel(document.getElementById("carrossel-depoimentos"));
 </script>
 </body>
 </html>
