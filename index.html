@@ -138,12 +138,6 @@
   }
   .nota-rodape { font-size: .85rem; color: var(--texto-suave); margin-top: 18px; }
 
-  /* Café */
-  .cafe { background: var(--papel); }
-  .cafe-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .cafe-fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cafe-fotos img { border-radius: var(--raio); aspect-ratio: 1; object-fit: cover; width: 100%; }
-  .cafe-fotos img:first-child { grid-column: span 2; aspect-ratio: 16/10; }
 
   /* Carrossel (fotos e comentários) */
   .carrossel { position: relative; }
@@ -328,7 +322,7 @@
   @media (max-width: 860px) {
     nav { display: none; }
     section { padding: 64px 0; }
-    .cafe-grade, .aval-grade, .local-grade { grid-template-columns: 1fr; gap: 28px; }
+    .aval-grade, .local-grade { grid-template-columns: 1fr; gap: 28px; }
     .quartos-fotos { grid-template-columns: 1fr 1fr; }
     .quartos-fotos img:first-child { grid-column: span 2; grid-row: auto; aspect-ratio: 4/3; }
     .barras { grid-template-columns: 1fr; }
@@ -354,7 +348,6 @@
     <a class="marca" href="#inicio"><img src="logo-claro.png" alt="">Bosque <span>das</span> Araucárias</a>
     <nav>
       <a href="#quartos">Quartos</a>
-      <a href="#cafe">Café da manhã</a>
       <a href="#fotos">Fotos</a>
       <a href="#avaliacoes">Avaliações</a>
       <a href="#reserva-direta">Reserva direta</a>
@@ -501,23 +494,6 @@
       </button>
       <p class="aviso-form">Este é um pedido de reserva. A reserva só está garantida depois da confirmação da pousada.</p>
     </form>
-  </div>
-</section>
-
-<!-- CAFÉ DA MANHÃ -->
-<section class="cafe" id="cafe">
-  <div class="container cafe-grade">
-    <div>
-      <div class="sobretitulo">Café da manhã</div>
-      <h2>Bom dia começa na mesa</h2>
-      <p class="intro">Café da manhã continental em buffet, servido no salão da pousada, com pães, frutas e sucos.</p>
-      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316" target="_blank" rel="noopener">Tirar dúvidas no WhatsApp</a>
-    </div>
-    <div class="cafe-fotos">
-      <img src="fotos/cafe-buffet.jpg" alt="Mesa de buffet do café da manhã com pães, frutas e sucos">
-      <img src="fotos/salao-cafe.jpg" alt="Salão do café com mesas e sofá">
-      <img src="fotos/cafe-buffet-2.jpg" alt="Buffet do café da manhã com bolos e frutas">
-    </div>
   </div>
 </section>
 
