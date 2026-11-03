@@ -69,6 +69,9 @@
   .botao-booking { background: var(--booking); color: #fff; }
   .botao-whatsapp { background: var(--whatsapp); color: #fff; }
   .botao-claro { background: #fff; color: var(--verde); }
+  /* Botão secundário sobre foto: só contorno, para não competir com o principal */
+  .botao-contorno { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.75); }
+  .botao-contorno:hover { background: rgba(255,255,255,.12); }
   .botao svg { width: 18px; height: 18px; fill: currentColor; }
 
   /* Cabeçalho */
@@ -99,7 +102,7 @@
     color: #fff;
   }
   .capa .sobretitulo { color: #e6d6b5; margin: 22px 0 12px; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
-  .capa h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); max-width: 18ch; }
+  .capa h1 { font-size: clamp(2rem, 4.6vw, 3.4rem); max-width: 20ch; }
   .capa p { font-size: 1.25rem; max-width: 600px; margin: 18px 0 28px; opacity: .95; }
   .capa .botoes { display: flex; flex-wrap: wrap; gap: 12px; }
   .selo-nota {
@@ -133,9 +136,12 @@
   }
   .tipo h3 { font-size: 1.2rem; color: var(--verde); margin-bottom: 6px; }
   .tipo p { margin: 0; color: var(--texto-suave); font-size: .93rem; }
-  .tipo .etiqueta {
-    display: inline-block; margin-top: 10px; font-size: .78rem; font-weight: 600;
-    color: var(--terracota); background: #f6e6dd; padding: 2px 10px; border-radius: 999px;
+  .tipo p.medida { color: var(--texto); font-weight: 600; margin-bottom: 4px; }
+  .titulo-comodidades { font-size: 1.1rem; color: var(--verde); margin: 32px 0 12px; }
+  .comodidades-quarto { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .comodidades-quarto li {
+    font-size: .9rem; padding: 6px 14px; border-radius: 999px;
+    background: var(--papel); border: 1px solid var(--linha);
   }
   .nota-rodape { font-size: .85rem; color: var(--texto-suave); margin-top: 18px; }
 
@@ -158,6 +164,7 @@
   .seta.proxima { right: 12px; }
 
   /* Galeria */
+  #fotos { background: var(--papel); }
   .foto-slide { margin: 0; position: relative; background: var(--verde); height: min(clamp(240px, 56vw, 600px), 70vh); }
   .foto-slide img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
   #carrossel-fotos .contador {
@@ -191,6 +198,7 @@
   .avaliacoes h2 { color: #fff; }
   .avaliacoes .intro { color: #cfdcd4; }
   .aval-grade { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+  .aval-grade > div { min-width: 0; } /* impede que o carrossel de comentários alargue a coluna */
   .nota-grande {
     background: #fff; color: var(--texto); border-radius: var(--raio); padding: 28px; text-align: center;
   }
@@ -236,6 +244,14 @@
   .passeio a { font-size: .88rem; font-weight: 600; color: var(--terracota); text-decoration: none; }
   .passeio a:hover { text-decoration: underline; }
   .avaliacoes .nota-rodape { color: #a9bdb1; }
+  .avaliar {
+    margin-top: 40px; padding: 26px 28px; border-radius: var(--raio);
+    border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;
+  }
+  .avaliar h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .avaliar p { margin: 0; color: #cfdcd4; max-width: 560px; }
+  .avaliar .nota-google { display: block; margin-top: 6px; font-weight: 600; color: #d9c7a3; }
 
   /* Localização */
   .local-grade { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0; }
@@ -351,7 +367,7 @@
       <a href="#localizacao">Localização</a>
       <a href="#passeios">O que fazer</a>
     </nav>
-    <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Reservar</a>
+    <a class="botao botao-whatsapp" href="#reserva-direta">Reservar</a>
   </div>
 </header>
 
@@ -363,11 +379,11 @@
     <h1>O seu refúgio particular nas montanhas de Campos do Jordão.</h1>
     <p>Acorde com a vista da Serra da Mantiqueira, em quartos aquecidos e com café da manhã em buffet.</p>
     <div class="botoes">
-      <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Ver disponibilidade no Booking</a>
-      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316" target="_blank" rel="noopener">
+      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316?text=Ol%C3%A1%2C%20Walkira!%20Gostaria%20de%20reservar%20direto%20com%20a%20pousada." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
-        Falar no WhatsApp
+        Reservar pelo WhatsApp
       </a>
+      <a class="botao botao-contorno" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Ver disponibilidade no Booking</a>
     </div>
   </div>
 </section>
@@ -390,7 +406,7 @@
   <div class="container">
     <div class="sobretitulo">Acomodações</div>
     <h2>Quartos para descansar de verdade</h2>
-    <p class="intro">Todos com banheiro privativo, produtos de banho de cortesia e roupa de cama. Há opções com varanda.</p>
+    <p class="intro">Quartos de 27 a 29 m², com aquecimento, banheiro privativo e produtos de banho de cortesia.</p>
 
     <div class="quartos-fotos">
       <img src="fotos/quarto-vermelho.jpg" alt="Quarto com cama de casal, mesa redonda e cadeiras de madeira">
@@ -400,27 +416,165 @@
       <img src="fotos/banheiro.jpg" alt="Banheiro com box de vidro">
     </div>
 
+    <!-- Tamanho, camas e comodidades: detalhes de cada quarto no Booking.com, consultados em 03/11/2026 -->
     <div class="tipos">
       <div class="tipo">
         <h3>Duplo com Varanda</h3>
-        <p>1 cama de casal grande</p>
-        <span class="etiqueta">Com varanda</span>
+        <p class="medida">27 m² · 1 cama de casal grande</p>
+        <p>Varanda com vista para as montanhas</p>
       </div>
       <div class="tipo">
         <h3>Duplo</h3>
-        <p>1 cama de casal grande</p>
+        <p class="medida">27 m² · 1 cama de casal grande</p>
       </div>
       <div class="tipo">
         <h3>Triplo com Varanda</h3>
-        <p>1 cama de casal e 1 cama de solteiro</p>
-        <span class="etiqueta">Com varanda</span>
+        <p class="medida">29 m² · 1 cama de casal e 1 de solteiro</p>
+        <p>Varanda com vista para as montanhas</p>
       </div>
       <div class="tipo">
         <h3>Triplo</h3>
-        <p>1 cama de casal e 1 cama de solteiro</p>
+        <p class="medida">29 m² · 1 cama de casal e 1 de solteiro</p>
       </div>
     </div>
-    <p class="nota-rodape">Preços e disponibilidade das datas que você escolher aparecem no <a href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Booking.com</a>.</p>
+
+    <h3 class="titulo-comodidades">Em todos os quartos</h3>
+    <ul class="comodidades-quarto">
+      <li>Aquecimento</li>
+      <li>Banheiro privativo com chuveiro</li>
+      <li>Secador de cabelo</li>
+      <li>Toalhas e roupa de cama</li>
+      <li>Frigobar</li>
+      <li>TV</li>
+      <li>Ventilador</li>
+      <li>Área para refeições</li>
+      <li>Piso de madeira</li>
+      <li>Tomada perto da cama</li>
+    </ul>
+    <p class="nota-rodape">Detalhes dos quartos conforme o Booking.com. Preços e disponibilidade: pela <a href="#reserva-direta">reserva direta</a> ou no <a href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Booking.com</a>.</p>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="fotos">
+  <div class="container">
+    <div class="sobretitulo">Fotos</div>
+    <h2>Conheça a pousada</h2>
+    <p class="intro">Sinta o clima da Serra da Mantiqueira antes mesmo de fazer as malas.</p>
+    <div class="carrossel" id="carrossel-fotos">
+      <div class="carrossel-janela">
+        <div class="trilho"></div>
+      </div>
+      <span class="contador"></span>
+      <button class="seta anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="seta proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="miniaturas" id="miniaturas"></div>
+  </div>
+</section>
+
+<dialog id="visor">
+  <button class="fechar" aria-label="Fechar">&times;</button>
+  <button class="seta anterior" id="visor-anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <img id="visor-img" alt="">
+  <p id="visor-contador"></p>
+  <button class="seta proxima" id="visor-proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</dialog>
+
+<!-- AVALIACOES — dados do Booking.com e do Google em 03/11/2026; atualizar à mão quando mudar -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="container">
+    <div class="sobretitulo" style="color:#d9c7a3">Avaliações</div>
+    <h2>O que dizem nossos hóspedes</h2>
+    <p class="intro">Notas dadas por hóspedes que se hospedaram pelo Booking.com.</p>
+
+    <div class="aval-grade">
+      <div class="nota-grande">
+        <div class="numero">9,2</div>
+        <div class="rotulo">Fantástico</div>
+        <small>261 avaliações no Booking.com</small>
+        <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html#tab-reviews" target="_blank" rel="noopener">Ler todas as avaliações</a>
+      </div>
+
+      <div>
+        <div class="barras" id="barras"></div>
+
+        <p style="margin:0 0 12px;font-weight:600">Os hóspedes mais elogiam</p>
+        <div class="elogios">
+          <span>A vista das montanhas</span>
+          <span>O atendimento</span>
+          <span>O café da manhã</span>
+          <span>A limpeza</span>
+          <span>A cama confortável</span>
+          <span>O quarto aquecido</span>
+        </div>
+
+        <!-- Os 10 comentários em destaque na página do Booking.com (03/11/2026), em carrossel.
+             Só a caixa alta e erros de digitação foram ajustados; o conteúdo é o do hóspede.
+             Para acrescentar um: copiar um <blockquote> inteiro e trocar o texto e o nome. -->
+        <div class="carrossel depoimentos" id="carrossel-depoimentos">
+          <div class="carrossel-janela">
+            <div class="trilho">
+              <blockquote class="depoimento">
+                <p>“Nossa experiência no hotel foi muito boa! Fomos muito bem recebidos, o atendimento foi excelente e o café da manhã estava muito bom. Nos sentimos acolhidos durante a estadia. Voltaremos com certeza.”</p>
+                <cite>Tamires, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Quarto confortável e limpo, ótimo café da manhã, silencioso para dormir.”</p>
+                <cite>Lais, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Gostamos de praticamente tudo, quarto simples mas com a cama e chuveiro maravilhosos, limpeza nota 10, a TV talvez um pouco pequena, mas nada que impossibilite ficar lá novamente, vista muito linda das montanhas.”</p>
+                <cite>Nakabar, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Vista incrível! Quarto com aquecimento (inclusive no banheiro). Atendimento jóia! Adorei a estadia!”</p>
+                <cite>Katia, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Gostei de tudo, do café da manhã, da localização e principalmente da vista... Além da cama, achei muito confortável... enfim, pena que só foi 1 dia rsrs”</p>
+                <cite>Sonia, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Muito bem localizada, o quarto com varanda é muito linda a vista. Ambiente calmo e acolhedor. Café da manhã ótimo.”</p>
+                <cite>Alexandre, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“De tudo lá: um bom atendimento, pessoas muito legais e uma vista muito bonita.”</p>
+                <cite>Santos, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Tudo muito bom, café da manhã excelente, voltarei mais vezes.”</p>
+                <cite>Tozati, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“A disponibilidade do proprietário em nos atender. Nos forneceu lanche após chegarmos muito cansadas da peregrinação (Caminho da Fé), mesmo não sendo sua obrigação. Vista maravilhosa.”</p>
+                <cite>Neiva, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+              <blockquote class="depoimento">
+                <p>“Gostei muito da atenção do Sr. Joel, foi prontamente a nossa solicitação.”</p>
+                <cite>Volner, Brasil · hóspede pelo Booking.com</cite>
+              </blockquote>
+            </div>
+          </div>
+          <div class="controles">
+            <button class="seta anterior" aria-label="Comentário anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <span class="contador"></span>
+            <button class="seta proxima" aria-label="Próximo comentário"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Avaliar pelo site: abre o perfil da pousada no Google Maps (cid = identificador do lugar) -->
+    <div class="avaliar">
+      <div>
+        <h3>Já se hospedou com a gente?</h3>
+        <p>Conte como foi. Sua avaliação ajuda outros viajantes a conhecer a pousada. <span class="nota-google">4,7 no Google · 216 avaliações</span></p>
+      </div>
+      <a class="botao botao-claro" href="https://maps.google.com/?cid=12537275241993665787" target="_blank" rel="noopener">Deixe sua avaliação no Google</a>
+    </div>
+
+    <p class="nota-rodape">Dados do Booking.com e do Google consultados em 03/11/2026.</p>
   </div>
 </section>
 
@@ -431,7 +585,7 @@
     <div>
       <div class="sobretitulo">Reserva direta</div>
       <h2>Reserve direto com a gente</h2>
-      <p class="intro" style="margin-bottom:0">Prefere falar com a pousada? Preencha o pedido e ele chega pronto no nosso WhatsApp.</p>
+      <p class="intro" style="margin-bottom:0">Atendimento personalizado, direto com a Walkira. Preencha o pedido e ele chega pronto no WhatsApp dela.</p>
       <div class="gestora">
         <div class="inicial" aria-hidden="true">W</div>
         <div>
@@ -495,93 +649,12 @@
   </div>
 </section>
 
-<!-- GALERIA -->
-<section id="fotos">
-  <div class="container">
-    <div class="sobretitulo">Fotos</div>
-    <h2>Conheça a pousada</h2>
-    <p class="intro">Use as setas ou deslize para ver todas as fotos. Toque na foto para ampliar.</p>
-    <div class="carrossel" id="carrossel-fotos">
-      <div class="carrossel-janela">
-        <div class="trilho"></div>
-      </div>
-      <span class="contador"></span>
-      <button class="seta anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button class="seta proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-    </div>
-    <div class="miniaturas" id="miniaturas"></div>
-  </div>
-</section>
-
-<dialog id="visor">
-  <button class="fechar" aria-label="Fechar">&times;</button>
-  <button class="seta anterior" id="visor-anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-  <img id="visor-img" alt="">
-  <p id="visor-contador"></p>
-  <button class="seta proxima" id="visor-proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-</dialog>
-
-<!-- AVALIACOES — dados do Booking.com em 31/10/2026; atualizar à mão quando mudar -->
-<section class="avaliacoes" id="avaliacoes">
-  <div class="container">
-    <div class="sobretitulo" style="color:#d9c7a3">Avaliações</div>
-    <h2>O que dizem nossos hóspedes</h2>
-    <p class="intro">Notas dadas por hóspedes que se hospedaram pelo Booking.com.</p>
-
-    <div class="aval-grade">
-      <div class="nota-grande">
-        <div class="numero">9,2</div>
-        <div class="rotulo">Fantástico</div>
-        <small>261 avaliações no Booking.com</small>
-        <a class="botao botao-booking" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html#tab-reviews" target="_blank" rel="noopener">Ler todas as avaliações</a>
-      </div>
-
-      <div>
-        <div class="barras" id="barras"></div>
-
-        <p style="margin:0 0 12px;font-weight:600">Os hóspedes mais elogiam</p>
-        <div class="elogios">
-          <span>A vista das montanhas</span>
-          <span>O atendimento</span>
-          <span>O café da manhã</span>
-          <span>A limpeza</span>
-          <span>A cama confortável</span>
-          <span>O quarto aquecido</span>
-        </div>
-
-        <!-- Comentários de hóspedes do Booking.com, em carrossel.
-             Para acrescentar um: copiar um <blockquote> inteiro e trocar o texto e o nome. -->
-        <div class="carrossel depoimentos" id="carrossel-depoimentos">
-          <div class="carrossel-janela">
-            <div class="trilho">
-        <blockquote class="depoimento">
-          <p>“Quarto confortável e limpo, ótimo café da manhã, silencioso para dormir.”</p>
-          <cite>Lais, Brasil · hóspede pelo Booking.com</cite>
-        </blockquote>
-              <blockquote class="depoimento">
-                <p>“Vista incrível! Quarto com aquecimento (inclusive no banheiro). Atendimento jóia! Adorei a estadia!”</p>
-                <cite>Katia, Brasil · hóspede pelo Booking.com</cite>
-              </blockquote>
-            </div>
-          </div>
-          <div class="controles">
-            <button class="seta anterior" aria-label="Comentário anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-            <span class="contador"></span>
-            <button class="seta proxima" aria-label="Próximo comentário"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="nota-rodape">Dados do Booking.com consultados em 31/10/2026.</p>
-  </div>
-</section>
-
 <!-- LOCALIZAÇÃO -->
 <section id="localizacao">
   <div class="container">
     <div class="sobretitulo">Localização</div>
     <h2>Como chegar</h2>
-    <p class="intro">Num ponto alto e tranquilo de Campos do Jordão, perto do Belvedere e a poucos minutos de carro de Capivari.</p>
+    <p class="intro">Num ponto alto e tranquilo de Campos do Jordão, a cerca de 11 minutos de carro de Capivari: ideal para passear de dia e ter silêncio à noite.</p>
 
     <div class="card-mapa local-grade">
       <iframe
@@ -595,11 +668,11 @@
           Campos do Jordão · SP · CEP 12460-000
         </address>
         <ul class="distancias">
+          <li>Capivari <b>11 min de carro</b></li>
           <li>Belvedere (mirante) <b>1,8 km</b></li>
-          <li>Capivari <b>4,9 km</b></li>
         </ul>
         <a class="botao botao-booking" style="background:var(--verde)" href="https://www.google.com/maps/dir/?api=1&destination=Avenida%20Doutor%20Irineu%20Gon%C3%A7alves%20da%20Silva%2C%202520%2C%20Campos%20do%20Jord%C3%A3o%20-%20SP" target="_blank" rel="noopener">Abrir rota no Google Maps</a>
-        <p class="nota-rodape">Distâncias informadas pelo Booking.com.</p>
+        <p class="nota-rodape">Tempo até Capivari: Google Maps, rota de 4,8 km, consultado em 03/11/2026 (varia com o trânsito). Distância até o Belvedere: Booking.com.</p>
       </div>
     </div>
   </div>
@@ -616,8 +689,8 @@
   </div>
 </section>
 
-<!-- INFORMAÇÕES ÚTEIS (políticas do Booking) -->
-<section style="padding-top:0">
+<!-- INFORMAÇÕES ÚTEIS (políticas do Booking; Pets e reserva direta conforme a pousada) -->
+<section>
   <div class="container">
     <div class="sobretitulo">Antes de vir</div>
     <h2 style="margin-bottom:28px">Informações úteis</h2>
@@ -627,7 +700,9 @@
       <div class="regra"><h3>Horário limite</h3><p>Entrada fechada entre 23h30 e 7h. Avise o horário de chegada.</p></div>
       <div class="regra"><h3>Crianças</h3><p>Bem-vindas. Berço grátis até 2 anos, mediante pedido.</p></div>
       <div class="regra"><h3>Silêncio</h3><p>Das 21h às 7h</p></div>
-      <div class="regra"><h3>Pets</h3><p>Não são permitidos.</p></div>
+      <div class="regra"><h3>Pets</h3><p>A combinar. Fale com a pousada antes de reservar.</p></div>
+      <!-- Cancelamento: texto do Booking (03/11/2026). A regra da reserva direta ainda não foi definida pela pousada. -->
+      <div class="regra"><h3>Cancelamento</h3><p>Booking.com: conforme a tarifa escolhida. Reserva direta: informado pela Walkira na confirmação.</p></div>
     </div>
   </div>
 </section>
