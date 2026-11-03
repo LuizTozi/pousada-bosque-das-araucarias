@@ -1,0 +1,44 @@
+# Atualiza a nota da pousada no Google uma vez por mês.
+# Roda no dia 1, às 12:00 UTC (9h em Brasília). Também pode ser disparado à mão,
+# na aba Actions do GitHub ("Run workflow").
+# A chave fica no segredo GOOGLE_PLACES_KEY do repositório; nunca no código.
+
+name: Atualizar nota do Google
+
+on:
+  schedule:
+    - cron: "0 12 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # para salvar a alteração no repositório
+  pages: write      # para pedir a republicação do site
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Buscar nota no Google e atualizar o index.html
+        env:
+          GOOGLE_PLACES_KEY: ${{ secrets.GOOGLE_PLACES_KEY }}
+        run: python scripts/atualizar_nota_google.py
+
+      - name: Salvar e republicar (só se a nota mudou)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "Nota igual à do mês passado; nada a salvar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Site: nota do Google atualizada automaticamente"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds"

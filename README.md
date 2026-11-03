@@ -53,3 +53,11 @@ python3 -m http.server 8765    # depois abrir http://127.0.0.1:8765
 
 - [ ] Remover a etiqueta `<meta name="robots" content="noindex, nofollow">`.
 - [ ] Configurar o domínio `pousadabosquedasaraucarias.com.br` (Settings → Pages → Custom domain).
+
+## Nota do Google atualizada todo mês
+
+- **O quê:** `scripts/atualizar_nota_google.py` consulta a Places API (New) do Google e troca, no `index.html`, o texto "4,7 no Google · 216 avaliações". Se o resultado da busca não for a pousada, ele para sem alterar nada.
+- **Quando:** `.github/workflows/atualizar-nota-google.yml` roda no dia 1 de cada mês (9h de Brasília). Para rodar na hora: aba **Actions** → "Atualizar nota do Google" → **Run workflow**.
+- **Chave:** fica no segredo `GOOGLE_PLACES_KEY` do repositório (Settings → Secrets and variables → Actions). Nunca no código.
+- **Rodar no computador:** `GOOGLE_PLACES_KEY=<chave> python scripts/atualizar_nota_google.py`
+- **Booking:** não tem API pública; a nota, as categorias e os comentários do Booking são atualizados à mão.
