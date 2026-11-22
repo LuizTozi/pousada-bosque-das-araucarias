@@ -95,13 +95,13 @@
   /* Capa */
   .capa {
     min-height: 100svh; display: flex; align-items: flex-end;
-    padding: 0 0 72px;
+    padding: 130px 0 88px;
     background:
       linear-gradient(180deg, rgba(0,0,0,.15) 30%, rgba(15,30,22,.8) 100%),
       url("fotos/quarto-casal.jpg") center / cover;
     color: #fff;
   }
-  .capa .sobretitulo { color: #e6d6b5; margin: 22px 0 12px; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+  .capa .alternativa { display: inline-block; margin-top: 16px; }
   .capa h1 { font-size: clamp(2rem, 4.6vw, 3.4rem); max-width: 20ch; }
   .capa p { font-size: 1.25rem; max-width: 600px; margin: 18px 0 28px; opacity: .95; }
   .capa .botoes { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -333,7 +333,7 @@
 
   /* Celular */
   @media (max-width: 860px) {
-    nav { display: none; }
+
     section { padding: 64px 0; }
     .aval-grade, .local-grade { grid-template-columns: 1fr; gap: 28px; }
     .quartos-fotos { grid-template-columns: 1fr 1fr; }
@@ -349,9 +349,24 @@
   @media (max-width: 520px) {
     .formulario { grid-template-columns: 1fr; padding: 20px; }
   }
-  @media (max-width: 420px) {
-    header .botao { display: none; }
+  @media (max-width: 1100px) {
+    html { scroll-padding-top: 108px; }
+    header .container { height: auto; display: grid; grid-template-columns: 1fr auto; gap: 0 8px; padding-top: 6px; }
+    header .botao { font-size: .85rem; }
+    header nav { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; gap: 8px; }
+    header nav a { padding: 8px 0; }
+    header nav .secundario { display: none; }
   }
+  @media (max-width: 520px) {
+    .marca { gap: 5px; font-size: .94rem; }
+    .marca img { height: 30px; }
+    header .botao { padding: 9px 12px; }
+    .capa { padding-bottom: 116px; }
+  }
+  @media (max-width: 360px) {
+    .marca img { display: none; }
+  }
+  .consulta-quarto { display: inline-block; padding-block: 10px; color: var(--verde); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -359,15 +374,15 @@
 <header>
   <div class="container">
     <a class="marca" href="#inicio"><img src="logo-claro.png" alt="">Bosque <span>das</span> Araucárias</a>
-    <nav>
+    <nav aria-label="Navegação principal">
       <a href="#quartos">Quartos</a>
       <a href="#fotos">Fotos</a>
-      <a href="#avaliacoes">Avaliações</a>
-      <a href="#reserva-direta">Reserva direta</a>
-      <a href="#localizacao">Localização</a>
-      <a href="#passeios">O que fazer</a>
+      <a class="secundario" href="#avaliacoes">Avaliações</a>
+      <a class="secundario" href="#reserva-direta">Reserva direta</a>
+      <a href="#localizacao">Como chegar</a>
+      <a class="secundario" href="#passeios">O que fazer</a>
     </nav>
-    <a class="botao botao-whatsapp" href="#reserva-direta">Reservar</a>
+    <a class="botao botao-claro" href="#form-reserva">Consultar datas</a>
   </div>
 </header>
 
@@ -375,16 +390,13 @@
 <section class="capa" id="inicio">
   <div class="container">
     <a class="selo-nota" href="#avaliacoes"><b>9,2</b> Fantástico no Booking · 261 avaliações</a>
-    <div class="sobretitulo">Pousada Bosque das Araucárias</div>
-    <h1>O seu refúgio particular nas montanhas de Campos do Jordão.</h1>
-    <p>Acorde com a vista da Serra da Mantiqueira, em quartos aquecidos e com café da manhã em buffet.</p>
+    <h1>Pousada Bosque das Araucárias em Campos do Jordão</h1>
+    <p>Quartos aquecidos, café da manhã em buffet e opções com varanda e vista para a Serra da Mantiqueira. A cerca de 11 minutos de carro de Capivari.</p>
     <div class="botoes">
-      <a class="botao botao-whatsapp" href="https://wa.me/5512997881316?text=Ol%C3%A1%2C%20Walkira!%20Gostaria%20de%20reservar%20direto%20com%20a%20pousada." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
-        Reservar pelo WhatsApp
-      </a>
-      <a class="botao botao-contorno" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Ver disponibilidade no Booking</a>
+      <a class="botao botao-claro" href="#form-reserva">Consultar datas</a>
+      <a class="botao botao-contorno" href="#quartos">Ver quartos</a>
     </div>
+    <a class="alternativa" href="https://www.booking.com/hotel/br/pousada-bosque-das-araucarias.pt-br.html" target="_blank" rel="noopener">Ver disponibilidade no Booking</a>
   </div>
 </section>
 
@@ -422,19 +434,23 @@
         <h3>Duplo com Varanda</h3>
         <p class="medida">27 m² · 1 cama de casal grande</p>
         <p>Varanda com vista para as montanhas</p>
+        <a class="consulta-quarto" href="#form-reserva" data-quarto="Duplo com Varanda" aria-label="Consultar este quarto: Duplo com Varanda">Consultar este quarto</a>
       </div>
       <div class="tipo">
         <h3>Duplo</h3>
         <p class="medida">27 m² · 1 cama de casal grande</p>
+        <a class="consulta-quarto" href="#form-reserva" data-quarto="Duplo" aria-label="Consultar este quarto: Duplo">Consultar este quarto</a>
       </div>
       <div class="tipo">
         <h3>Triplo com Varanda</h3>
         <p class="medida">29 m² · 1 cama de casal e 1 de solteiro</p>
         <p>Varanda com vista para as montanhas</p>
+        <a class="consulta-quarto" href="#form-reserva" data-quarto="Triplo com Varanda" aria-label="Consultar este quarto: Triplo com Varanda">Consultar este quarto</a>
       </div>
       <div class="tipo">
         <h3>Triplo</h3>
         <p class="medida">29 m² · 1 cama de casal e 1 de solteiro</p>
+        <a class="consulta-quarto" href="#form-reserva" data-quarto="Triplo" aria-label="Consultar este quarto: Triplo">Consultar este quarto</a>
       </div>
     </div>
 
@@ -737,9 +753,9 @@
   </div>
 </footer>
 
-<a class="whats-flutuante" href="https://wa.me/5512997881316?text=Ol%C3%A1%2C%20Walkira!%20Gostaria%20de%20reservar%20direto%20com%20a%20pousada." target="_blank" rel="noopener" aria-label="Reserve direto com a gente pelo WhatsApp">
+<a class="whats-flutuante" href="https://wa.me/5512997881316?text=Ol%C3%A1%2C%20Walkira!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20pousada." target="_blank" rel="noopener" aria-label="Falar com a pousada pelo WhatsApp">
   <span class="circulo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.1-4.5c-.4-.5-.9-1.5-.9-2.6 0-1.1.6-1.6.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span>
-  <span class="rotulo">Reserve direto com a gente</span>
+  <span class="rotulo">Falar com a pousada</span>
 </a>
 
 <script>
@@ -912,6 +928,14 @@
   const campoSaida = document.getElementById("saida");
   const erroReserva = document.getElementById("erro-reserva");
 
+  const campoQuarto = document.getElementById("quarto");
+  for (const link of document.querySelectorAll(".consulta-quarto")) {
+    link.addEventListener("click", () => {
+      campoQuarto.value = link.dataset.quarto;
+      campoEntrada.focus({ preventScroll: true });
+    });
+  }
+
   const hoje = new Date().toLocaleDateString("en-CA"); // AAAA-MM-DD no fuso do visitante
   campoEntrada.min = hoje;
   campoSaida.min = hoje;
@@ -941,7 +965,7 @@
       `Saída: ${dataBR(saida)} (${noites} ${noites === 1 ? "noite" : "noites"})`,
       `Adultos: ${document.getElementById("adultos").value}`,
       `Crianças: ${document.getElementById("criancas").value}`,
-      `Quarto: ${document.getElementById("quarto").value}`,
+      `Quarto: ${campoQuarto.value}`,
     ];
     if (observacoes) linhas.push(`Observações: ${observacoes}`);
 
